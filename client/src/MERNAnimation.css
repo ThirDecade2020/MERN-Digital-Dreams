@@ -1,30 +1,36 @@
 /* MERNAnimation.css */
 
+/* Container that covers the entire screen */
 .mernanimation-container {
-    position: fixed;       /* Fill the entire screen */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: #000;      /* Black background for the animated scene */
+    background: #000;
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 9999;
     overflow: hidden;
-    z-index: 9999;         /* Ensure it appears above everything else */
   }
   
-  .mernanimation-content {
-    color: #0ff;           /* Neon cyan text */
+  /* General styling for each phase */
+  .phase {
+    color: #0ff;
     text-align: center;
-    animation: fadeInOut 60s linear infinite; /* Simple 60s loop as an example */
+    width: 80%;
+    max-width: 800px;
+    margin: 0 auto;
+    animation: fadePhase 15s linear;
+    position: relative;
   }
   
-  /* Example keyframes for a simple fade in/out effect */
-  @keyframes fadeInOut {
+  /* Fade in/out each phase over 15s */
+  @keyframes fadePhase {
     0% {
       opacity: 0;
-      transform: scale(0.8);
+      transform: scale(0.9);
     }
     10% {
       opacity: 1;
@@ -36,7 +42,187 @@
     }
     100% {
       opacity: 0;
-      transform: scale(0.8);
+      transform: scale(0.9);
+    }
+  }
+  
+  /* =============== PHASE 0: SWIRLING PORTAL =============== */
+  .portal-title {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+  }
+  
+  .portal {
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background: conic-gradient(
+      from 0deg,
+      #0ff,
+      #00f,
+      #f0f,
+      #ff0,
+      #0f0,
+      #0ff
+    );
+    animation: swirl 3s linear infinite;
+  }
+  
+  @keyframes swirl {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* =============== PHASE 1: NEON CITYSCAPE (Immersive) =============== */
+  .cityscape {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    background: #000;
+    overflow: hidden;
+  }
+  
+  /* The street simulates a perspective view moving forward */
+  .street {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 120px;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0,255,255,0.8), transparent);
+    transform: translateX(-50%);
+    z-index: 2;
+    animation: streetMove 15s linear infinite;
+  }
+  
+  /* Simple neon buildings on either side */
+  .building {
+    position: absolute;
+    bottom: 0;
+    width: 60px;
+    height: 200px;
+    background: rgba(0, 255, 255, 0.3);
+    border: 2px solid #0ff;
+    z-index: 1;
+    animation: buildingMove 15s linear infinite;
+  }
+  
+  .building.left {
+    left: 10%;
+  }
+  
+  .building.right {
+    right: 10%;
+  }
+  
+  /* Animate the street moving upward to simulate forward motion */
+  @keyframes streetMove {
+    0% { transform: translate(-50%, 0); }
+    100% { transform: translate(-50%, -100%); }
+  }
+  
+  /* Animate the buildings moving upward and scaling slightly */
+  @keyframes buildingMove {
+    0% { transform: translateY(0) scale(1); }
+    100% { transform: translateY(-100%) scale(1.2); }
+  }
+  
+  /* =============== PHASE 2: ICON MORPHING =============== */
+  .icons-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  
+  .icon-m,
+  .icon-e,
+  .icon-r,
+  .icon-n {
+    font-size: 3rem;
+    font-weight: bold;
+    border: 2px solid #0ff;
+    padding: 1rem;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: morphLetters 15s linear infinite;
+  }
+  
+  .morph-m {
+    color: #0f0;
+  }
+  .morph-e {
+    color: #eee;
+  }
+  .morph-r {
+    color: #61dafb;
+  }
+  .morph-n {
+    color: #8cc84b;
+  }
+  
+  @keyframes morphLetters {
+    0% {
+      transform: scale(1);
+    }
+    25% {
+      transform: scale(1.2) rotate(10deg);
+    }
+    50% {
+      transform: scale(1) rotate(-10deg);
+    }
+    75% {
+      transform: scale(1.2) rotate(10deg);
+    }
+    100% {
+      transform: scale(1) rotate(0deg);
+    }
+  }
+  
+  /* =============== PHASE 3: DATA FLOW =============== */
+  .data-flow {
+    position: relative;
+    width: 400px;
+    height: 200px;
+    margin: 1rem auto;
+    border: 2px solid #0ff;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+  
+  .data-line {
+    position: absolute;
+    width: 2px;
+    height: 20px;
+    background-color: #0ff;
+    animation: flow 2s linear infinite;
+  }
+  
+  .line1 {
+    left: 30%;
+  }
+  .line2 {
+    left: 50%;
+  }
+  .line3 {
+    left: 70%;
+  }
+  
+  @keyframes flow {
+    0% {
+      top: 200px;
+    }
+    100% {
+      top: -20px;
     }
   }
   
