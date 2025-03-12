@@ -1,22 +1,21 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
+  const [apiMessage, setApiMessage] = useState('');
+
+  useEffect(() => {
+    fetch('/api/test')
+      .then(response => response.json())
+      .then(data => setApiMessage(data.message))
+      .catch(err => console.error("Error fetching API:", err));
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>MERN Digital Dreams</h1>
+        <p>{apiMessage ? apiMessage : 'Loading API data...'}</p>
       </header>
     </div>
   );
