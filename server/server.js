@@ -2,9 +2,9 @@ const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// A simple route for testing
-app.get('/', (req, res) => {
-  res.send('Hello from MERN Digital Dreams!');
+// A simple test route
+app.get('/api/test', (req, res) => {
+  res.json({ message: 'Hello from the MERN backend!' });
 });
 
 // Start the server
